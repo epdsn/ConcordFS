@@ -5,23 +5,30 @@ import sys
 pygame.init()
 
 # Set up the screen
-screen_width = 800
-screen_height = 600
+screen_width = 1000
+screen_height = 850
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Flight Simulator")
+pygame.display.set_caption("Concorde Flight Simulator")
 
 # Set up colors
 WHITE = (255, 255, 255)
+DARK_GREY = (50, 50, 50)
+
+# Set up the rectangle
+rect_width = screen_width / 2
+rect_height = 25
+rect_x = 10
+rect_y = screen_height - 50
 
 # Load images
-background_image = pygame.image.load('background.jpg')
-plane_image = pygame.image.load('plane.png')
+background_image = pygame.image.load('background_pixel.jpg')
+plane_image = pygame.image.load('plane_pixel.png')
 
 # Set up the plane
 plane_width = 50
 plane_height = 50
-plane_x = screen_width // 2 - plane_width // 2
-plane_y = screen_height - 100
+plane_x = 100 #screen_width // 2 - plane_width // 2
+plane_y = screen_height - 62
 
 # Set up game loop
 clock = pygame.time.Clock()
@@ -35,12 +42,13 @@ while running:
 
     # Handle key events
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        plane_x -= 5
+    #Turning off left
+    #if keys[pygame.K_LEFT]:
+        #plane_x -= 5
     if keys[pygame.K_RIGHT]:
         plane_x += 5
     if keys[pygame.K_UP]:
-        plane_y -= 5
+        plane_y -= 2
     if keys[pygame.K_DOWN]:
         plane_y += 5
 
@@ -51,8 +59,13 @@ while running:
     # Clear the screen
     screen.fill(WHITE)
 
-    # Draw background and plane
+    # Draw background
     screen.blit(background_image, (0, 0))
+
+    # Draw runway
+    pygame.draw.rect(screen, DARK_GREY, (rect_x, rect_y, rect_width, rect_height))
+
+    # Draw plane
     screen.blit(plane_image, (plane_x, plane_y))
 
     # Update the display
