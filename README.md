@@ -1,4 +1,4 @@
-# Flight Simulator
+# ConcordeFS
 
 Welcome to ConcordeFS, a simple flight simulator game built using Python and Pygame.
 
