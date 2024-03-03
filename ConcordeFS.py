@@ -23,6 +23,7 @@ rect_y = screen_height - 50
 # Load images
 background_image = pygame.image.load('background_pixel.jpg')
 plane_image = pygame.image.load('plane_pixel.png')
+original_plane_image = plane_image
 
 # Set up the initial position of the background
 background_x = 0
@@ -30,8 +31,8 @@ background_x = 0
 # Set up the plane
 plane_width = 50
 plane_height = 50
-plane_x = 100 #screen_width // 2 - plane_width // 2
-plane_y = screen_height - 62
+plane_x = 100  # Initial x-coordinate of the plane
+plane_y = screen_height - 62  # Initial y-coordinate of the plane
 
 # Set up game loop
 clock = pygame.time.Clock()
@@ -45,15 +46,16 @@ while running:
 
     # Handle key events
     keys = pygame.key.get_pressed()
-    #Turning off left
-    #if keys[pygame.K_LEFT]:
-        #plane_x -= 5
+    if keys[pygame.K_LEFT]:
+        plane_image = pygame.transform.flip(original_plane_image, True, False)  # Flip the plane horizontally
+        plane_x -= 5  # Move the plane left by decreasing its x-coordinate
     if keys[pygame.K_RIGHT]:
-        plane_x += 5
+        plane_image = original_plane_image  # Reset the plane image to its original orientation
+        plane_x += 5  # Move the plane right by increasing its x-coordinate
     if keys[pygame.K_UP]:
-        plane_y -= 2
+        plane_y -= 2  # Move the plane up by decreasing its y-coordinate
     if keys[pygame.K_DOWN]:
-        plane_y += 5
+        plane_y += 5  # Move the plane down by increasing its y-coordinate
 
     # Keep plane within screen boundaries
     plane_x = max(0, min(plane_x, screen_width - plane_width))
@@ -65,6 +67,13 @@ while running:
     # If the background has scrolled off the screen, reset its position
     if background_x <= -background_image.get_width():
         background_x = 0
+
+    # Update the position of the runway
+    rect_x -= 1  # Move the runway to the left along with the background
+
+    # If the runway has scrolled off the screen, reset its position
+    if rect_x + rect_width <= 0:
+        rect_x = screen_width
 
     # Clear the screen
     screen.fill(WHITE)
