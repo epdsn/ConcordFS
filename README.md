@@ -1,6 +1,6 @@
 # ConcordeFS
 
-Welcome to ConcordeFS, a simple flight simulator game built using Python and Pygame.
+Welcome to ConcordeFS, an 8-bit 2-d simple flight simulator game built using Python and Pygame.
 
 ## Description
 
