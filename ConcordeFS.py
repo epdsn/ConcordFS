@@ -24,6 +24,9 @@ rect_y = screen_height - 50
 background_image = pygame.image.load('background_pixel.jpg')
 plane_image = pygame.image.load('plane_pixel.png')
 
+# Set up the initial position of the background
+background_x = 0
+
 # Set up the plane
 plane_width = 50
 plane_height = 50
@@ -56,11 +59,19 @@ while running:
     plane_x = max(0, min(plane_x, screen_width - plane_width))
     plane_y = max(0, min(plane_y, screen_height - plane_height))
 
+    # Update the position of the background
+    background_x -= 1  # Adjust the scrolling speed here
+
+    # If the background has scrolled off the screen, reset its position
+    if background_x <= -background_image.get_width():
+        background_x = 0
+
     # Clear the screen
     screen.fill(WHITE)
 
     # Draw background
-    screen.blit(background_image, (0, 0))
+    screen.blit(background_image, (background_x, 0))
+    screen.blit(background_image, (background_x + background_image.get_width(), 0))
 
     # Draw runway
     pygame.draw.rect(screen, DARK_GREY, (rect_x, rect_y, rect_width, rect_height))
