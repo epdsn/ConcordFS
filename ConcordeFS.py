@@ -35,7 +35,7 @@ background_x = 0
 plane_width = 50
 plane_height = 50
 plane_x = 100  # Initial x-coordinate of the plane
-plane_y = screen_height - 62  # Initial y-coordinate of the plane
+plane_y = screen_height // 2  + 100  # Initial y-coordinate of the plane
 
 # Set up game loop
 clock = pygame.time.Clock()
