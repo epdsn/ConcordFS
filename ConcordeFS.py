@@ -23,7 +23,7 @@ runway_x = 0
 runway_y = screen_height - 50
 
 # Load images
-background_image = pygame.image.load('background_pixel.jpg')
+background_image = pygame.image.load('background_pixel_001.jpg')
 start_screen_background = pygame.image.load('start_screen_background.png')
 plane_image = pygame.image.load('plane_pixel.png')
 original_plane_image = plane_image
