@@ -27,6 +27,11 @@ python ConcordeFS.py
 
 ## Controls
 - Use the arrow keys to control the plane's movement.
+- or WASD
+- D = Throttle Up
+- A = Throttle Down
+- S = Pitch up
+- W = Pitch Down
 - Press ESC to exit the game.
 
 ## Dependencies
