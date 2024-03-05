@@ -48,6 +48,11 @@ start_button_rect = start_button_text.get_rect(center=(screen_width // 2, screen
 # Angle of rotation for the plane
 plane_angle = 0
 
+# Set up speed values
+forward_speed = 5
+left_speed = 3
+right_speed = 8
+
 # Main game loop
 start_screen = True
 running = True
@@ -65,11 +70,11 @@ while running:
         # Handle key events
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            plane_image = pygame.transform.flip(original_plane_image, True, False)  # Flip the plane horizontally
-            plane_x -= 5  # Move the plane left by decreasing its x-coordinate
+            #plane_image = pygame.transform.flip(original_plane_image, True, False)  # Flip the plane horizontally
+            plane_x -= left_speed  # Move the plane left by decreasing its x-coordinate
         if keys[pygame.K_RIGHT]:
             plane_image = original_plane_image  # Reset the plane image to its original orientation
-            plane_x += 5  # Move the plane right by increasing its x-coordinate
+            plane_x += right_speed  # Move the plane right by increasing its x-coordinate
         if keys[pygame.K_UP]:
             plane_y -= 5.0  # Move the plane up by decreasing its y-coordinate
             plane_angle = 5  # Adjust the angle of rotation when K_UP is pressed
@@ -82,7 +87,7 @@ while running:
         plane_y = max(0, min(plane_y, screen_height - plane_height))
 
         # Update the position of the background
-        background_x -= 1  # Adjust the scrolling speed here
+        background_x -= forward_speed  # Adjust the scrolling speed here
 
         # If the background has scrolled off the screen, reset its position
         if background_x <= -background_image.get_width():
