@@ -62,23 +62,25 @@ while running:
             running = False
 
         if start_screen:
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if start_button_rect.collidepoint(event.pos):
                     start_screen = False  # Start the game when the start button is clicked
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                start_screen = False  # Start the game when the return key is pressed           
 
     if not start_screen:  # If not in the start screen
         # Handle key events
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_a] or keys[pygame.K_LEFT]:
             #plane_image = pygame.transform.flip(original_plane_image, True, False)  # Flip the plane horizontally
             plane_x -= left_speed  # Move the plane left by decreasing its x-coordinate
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             plane_image = original_plane_image  # Reset the plane image to its original orientation
             plane_x += right_speed  # Move the plane right by increasing its x-coordinate
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_s] or keys[pygame.K_UP]:
             plane_y -= 5.0  # Move the plane up by decreasing its y-coordinate
             plane_angle = 5  # Adjust the angle of rotation when K_UP is pressed
-        if keys[pygame.K_DOWN]:
+        if keys[pygame.K_w] or keys[pygame.K_DOWN]:
             plane_y = min(plane_y + 5, screen_height - plane_height - 25)  # Move the plane down by increasing its y-coordinate, but not below the bottom boundary
             planse_angle = -5  # Adjust the angle of rotation when K_DOWN is pressed
 
