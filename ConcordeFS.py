@@ -71,11 +71,11 @@ while running:
             plane_image = original_plane_image  # Reset the plane image to its original orientation
             plane_x += 5  # Move the plane right by increasing its x-coordinate
         if keys[pygame.K_UP]:
-            plane_y -= 2  # Move the plane up by decreasing its y-coordinate
-            # plane_angle = -5  # Adjust the angle of rotation when K_UP is pressed
+            plane_y -= 5.0  # Move the plane up by decreasing its y-coordinate
+            plane_angle = 5  # Adjust the angle of rotation when K_UP is pressed
         if keys[pygame.K_DOWN]:
             plane_y += 5  # Move the plane down by increasing its y-coordinate
-            # plane_angle = 5  # Adjust the angle of rotation when K_DOWN is pressed
+            planse_angle = -5  # Adjust the angle of rotation when K_DOWN is pressed
 
         # Keep plane within screen boundaries
         plane_x = max(0, min(plane_x, screen_width - plane_width))
@@ -113,6 +113,10 @@ while running:
 
         # Draw plane
         screen.blit(rotated_plane, (plane_x, plane_y))
+
+        # Reset the angle when neither UP nor DOWN key is pressed
+        if not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
+            plane_angle = 0
 
     # Update the display
     pygame.display.flip()
