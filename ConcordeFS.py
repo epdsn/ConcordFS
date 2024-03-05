@@ -67,6 +67,10 @@ while running:
                     start_screen = False  # Start the game when the start button is clicked
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 start_screen = False  # Start the game when the return key is pressed           
+        else:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                start_screen = True  # Go back to the start screen if Escape is pressed
+
 
     if not start_screen:  # If not in the start screen
         # Handle key events
