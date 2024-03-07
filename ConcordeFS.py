@@ -86,7 +86,7 @@ while running:
             plane_angle = 5  # Adjust the angle of rotation when K_UP is pressed
         if keys[pygame.K_w] or keys[pygame.K_DOWN]:
             plane_y = min(plane_y + 5, screen_height - plane_height - 25)  # Move the plane down by increasing its y-coordinate, but not below the bottom boundary
-            planse_angle = -5  # Adjust the angle of rotation when K_DOWN is pressed
+            plane_angle = -5  # Adjust the angle of rotation when K_DOWN is pressed
 
         # Keep plane within screen boundaries
         plane_x = max(0, min(plane_x, screen_width - plane_width))
