@@ -48,5 +48,5 @@ python ConcordeFS.py
 
 ## Author
 
-- [Eric Perez](https://github.com/epdsn) - Full Stack Developer
-- [Benicio Perez] - Director
+- [Eric Perez](https://github.com/epdsn) - Artist | Programmer
+- Benicio Perez - Director | Visionary
