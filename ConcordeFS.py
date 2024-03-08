@@ -157,6 +157,9 @@ try:
             screen.blit(background_image, (background_x, 0))
             screen.blit(background_image, (background_x + background_image.get_width(), 0))
 
+            for obstacle in obstacles:
+                screen.blit(obstacle.image, obstacle.rect)
+
             # Draw runway
             pygame.draw.rect(screen, DARK_GREY, (runway_x, runway_y, runway_width, runway_height))
 
@@ -171,6 +174,7 @@ try:
                     # For simplicity, let's reset the plane position
                     plane_x = 100
                     plane_y = screen_height // 2 + 100
+                    logging.info("BOOM! The concord flew into a mountain!")
 
             # Get the bounding rectangle of the rotated plane image
             plane_rect = rotated_plane.get_rect()
@@ -192,7 +196,7 @@ try:
 
 except Exception as e:
     # Log errors to the file
-    logging.error("An error occurred:", e)
+    logging.exception("An error occurred:")
 
 # Quit Pygame
 pygame.quit()
