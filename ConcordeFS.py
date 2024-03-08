@@ -1,6 +1,7 @@
 import pygame
 import sys
 import logging
+from graphics import Graphics
 
 # Configure logging
 logging.basicConfig(filename='debug.log', 
@@ -19,11 +20,8 @@ screen_height = 850
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Concorde Flight Simulator 8-bit")
 
-# Set up colors
-WHITE = (255, 255, 255)
-DARK_GREY = (50, 50, 50)
-BUTTON_COLOR = (0, 150, 0)
-BUTTON_TEXT_COLOR = (255, 255, 255)
+# Initialize the Graphics class
+graphics = Graphics()
 
 # Set up the runway
 runway_width = screen_width
@@ -31,16 +29,8 @@ runway_height = 25
 runway_x = 0
 runway_y = screen_height - 50
 
-# Load images
-background_image = pygame.image.load('assets/images/background_pixel_001.jpg')
-start_screen_background = pygame.image.load('assets/images/start_screen_image.png')
-plane_image = pygame.image.load('assets/images/plane_pixel.png')
-original_plane_image = plane_image
-mountain_image = pygame.image.load('assets/images/mountain.png')
-
 # Set up buttons
-button_font = pygame.font.Font(None, 36)
-start_button_text = button_font.render('START', True, BUTTON_TEXT_COLOR)
+start_button_text = graphics.button_font.render('START', True, graphics.BUTTON_TEXT_COLOR)
 start_button_rect = start_button_text.get_rect(center=(screen_width // 2, screen_height // 2 + 225))
 
 # Set up the plane
@@ -63,7 +53,7 @@ right_speed = 8
 # Define obstacle class
 class Obstacle:
     def __init__(self, x, y):
-        self.image = mountain_image
+        self.image = graphics.mountain_image
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
 
@@ -129,42 +119,42 @@ try:
             background_x -= forward_speed  # Adjust the scrolling speed here
 
             # If the background has scrolled off the screen, reset its position
-            if background_x <= -background_image.get_width():
+            if background_x <= -graphics.background_image.get_width():
                 background_x = 0
 
             # Add obstacles
             if len(obstacles) == 0 or obstacles[-1].rect.right < screen_width - obstacle_frequency:
-                obstacles.append(Obstacle(screen_width, screen_height - mountain_image.get_height() - (runway_height * 2 + 10)))
+                obstacles.append(Obstacle(screen_width, screen_height - graphics.mountain_image.get_height() - (runway_height * 2 + 10)))
 
             # Move obstacles
             for obstacle in obstacles:
                 obstacle.move(forward_speed)
 
         # Clear the screen
-        screen.fill(WHITE)
+        screen.fill(graphics.WHITE)
 
         if start_screen:
             # Draw start screen background
-            screen.blit(start_screen_background, (0, 0))
+            screen.blit(graphics.start_screen_background, (0, 0))
 
             # Draw start screen
-            pygame.draw.rect(screen, BUTTON_COLOR, start_button_rect)
-            pygame.draw.rect(screen, DARK_GREY, start_button_rect, 2)  # Border
+            pygame.draw.rect(screen, graphics.BUTTON_COLOR, start_button_rect)
+            pygame.draw.rect(screen, graphics.DARK_GREY, start_button_rect, 2)  # Border
             screen.blit(start_button_text, start_button_rect)
 
         else:  # If not in the start screen
             # Draw background
-            screen.blit(background_image, (background_x, 0))
-            screen.blit(background_image, (background_x + background_image.get_width(), 0))
+            screen.blit(graphics.background_image, (background_x, 0))
+            screen.blit(graphics.background_image, (background_x + graphics.background_image.get_width(), 0))
 
             for obstacle in obstacles:
                 screen.blit(obstacle.image, obstacle.rect)
 
             # Draw runway
-            pygame.draw.rect(screen, DARK_GREY, (runway_x, runway_y, runway_width, runway_height))
+            pygame.draw.rect(screen, graphics.DARK_GREY, (runway_x, runway_y, runway_width, runway_height))
 
             # Rotate the plane image
-            rotated_plane = pygame.transform.rotate(plane_image, plane_angle)
+            rotated_plane = pygame.transform.rotate(graphics.plane_image, plane_angle)
 
             # Inside the main game loop, after drawing the obstacles but before updating the display
             for obstacle in obstacles:
