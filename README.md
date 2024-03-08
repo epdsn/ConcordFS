@@ -1,5 +1,7 @@
 # ConcordeFS
 
+![image info](assets/images/start_screen_image.png)
+
 Welcome to ConcordeFS! A 2D flight simulator.
 
 Embark on an exciting journey through the skies with ConcordeFS, an 8-bit 2D flight simulator game built using Python and Pygame. Experience the thrill of flying and master the basic controls as you navigate through pixelated landscapes.
