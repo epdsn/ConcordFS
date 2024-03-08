@@ -3,7 +3,10 @@ import sys
 import logging
 
 # Configure logging
-logging.basicConfig(filename='debug.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='debug.log', 
+                    level=logging.INFO,  
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    datefmt='%Y-%m-%d %I:%M:%S %p')
 
 # Log some messages
 logging.debug('This is a debug message')
