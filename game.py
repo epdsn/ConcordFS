@@ -154,7 +154,7 @@ try:
             except Exception as e:
                 logging.error("An error occurred while loading the game screen: {e}")
 
-            # Inside the main game loop, after drawing the obstacles but before updating the display
+            # Mountain Collision detection
             for obstacle in obstacles:
                 if plane_rect and plane_rect.colliderect(obstacle.rect):
                     # Collision detected
