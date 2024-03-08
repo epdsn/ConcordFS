@@ -4,6 +4,9 @@ import sys
 # Initialize Pygame
 pygame.init()
 
+# Set up game loop
+clock = pygame.time.Clock()
+
 # Set up the screen
 screen_width = 1000
 screen_height = 850
@@ -29,8 +32,10 @@ plane_image = pygame.image.load('assets/images/plane_pixel.png')
 original_plane_image = plane_image
 mountain_image = pygame.image.load('assets/images/mountain.png')
 
-# Set up the initial position of the background
-background_x = 0
+# Set up buttons
+button_font = pygame.font.Font(None, 36)
+start_button_text = button_font.render('START', True, BUTTON_TEXT_COLOR)
+start_button_rect = start_button_text.get_rect(center=(screen_width // 2, screen_height // 2 + 225))
 
 # Set up the plane
 plane_width = 50
@@ -38,16 +43,11 @@ plane_height = 50
 plane_x = 100  # Initial x-coordinate of the plane
 plane_y = screen_height // 2 + 100  # Initial y-coordinate of the plane
 
-# Set up game loop
-clock = pygame.time.Clock()
-
-# Set up buttons
-button_font = pygame.font.Font(None, 36)
-start_button_text = button_font.render('START', True, BUTTON_TEXT_COLOR)
-start_button_rect = start_button_text.get_rect(center=(screen_width // 2, screen_height // 2 + 225))
-
 # Angle of rotation for the plane
 plane_angle = 0
+
+# Set up the initial position of the background
+background_x = 0
 
 # Set up speed values
 forward_speed = 5
