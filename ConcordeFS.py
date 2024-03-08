@@ -135,7 +135,10 @@ try:
 
         if start_screen:
             # Draw start screen background
-            graphics.draw_start_screen(screen, start_button_rect)
+            try:
+                graphics.draw_start_screen(screen, start_button_rect)
+            except Exception as e:
+                logging.error("An error occured while loading the start screen")
 
         else:  # If not in the start screen
 
@@ -145,7 +148,11 @@ try:
             plane_rect = rotated_plane.get_rect()
             # Set its position
             plane_rect.topleft = (plane_x, plane_y)
-            graphics.draw_game_screen(screen, background_x, runway_x, runway_y, runway_width, runway_height, obstacles, plane_rect, rotated_plane)
+
+            try:
+                graphics.draw_game_screen(screen, background_x, runway_x, runway_y, runway_width, runway_height, obstacles, plane_rect, rotated_plane)
+            except Exception as e:
+                logging.error("An error occurred while loading the game screen: {e}")
 
             # Inside the main game loop, after drawing the obstacles but before updating the display
             for obstacle in obstacles:
