@@ -31,7 +31,7 @@ ConcordeFS is a basic flight simulation game where players can control a plane u
 4. Navigate to the project directory:
 cd flight-simulator
 5. Run the main Python script:
-python ConcordeFS.py
+python game.py
 
 ## Controls
 - Use the arrow keys to control the plane's movement.
