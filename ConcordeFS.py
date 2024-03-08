@@ -135,26 +135,18 @@ try:
 
         if start_screen:
             # Draw start screen background
-            screen.blit(graphics.start_screen_background, (0, 0))
-
-            # Draw start screen
-            pygame.draw.rect(screen, graphics.BUTTON_COLOR, start_button_rect)
-            pygame.draw.rect(screen, graphics.DARK_GREY, start_button_rect, 2)  # Border
-            screen.blit(start_button_text, start_button_rect)
+            graphics.draw_start_screen(screen, start_button_rect)
 
         else:  # If not in the start screen
-            # Draw background
-            screen.blit(graphics.background_image, (background_x, 0))
-            screen.blit(graphics.background_image, (background_x + graphics.background_image.get_width(), 0))
-
-            for obstacle in obstacles:
-                screen.blit(obstacle.image, obstacle.rect)
-
-            # Draw runway
-            pygame.draw.rect(screen, graphics.DARK_GREY, (runway_x, runway_y, runway_width, runway_height))
 
             # Rotate the plane image
             rotated_plane = pygame.transform.rotate(graphics.plane_image, plane_angle)
+            # Get the bounding rectangle of the rotated plane image
+            plane_rect = rotated_plane.get_rect()
+            # Set its position
+            plane_rect.topleft = (plane_x, plane_y)
+
+            graphics.draw_game_screen(screen, background_x, runway_x, runway_y, runway_width, runway_height, obstacles, plane_rect, rotated_plane)
 
             # Inside the main game loop, after drawing the obstacles but before updating the display
             for obstacle in obstacles:
@@ -165,14 +157,6 @@ try:
                     plane_x = 100
                     plane_y = screen_height // 2 + 100
                     logging.info("BOOM! The concord flew into a mountain!")
-
-            # Get the bounding rectangle of the rotated plane image
-            plane_rect = rotated_plane.get_rect()
-            # Set its position
-            plane_rect.topleft = (plane_x, plane_y)
-
-            # Draw plane
-            screen.blit(rotated_plane, plane_rect)
 
             # Reset the angle when neither UP nor DOWN key is pressed
             if not keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
