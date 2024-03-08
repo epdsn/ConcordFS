@@ -145,7 +145,6 @@ try:
             plane_rect = rotated_plane.get_rect()
             # Set its position
             plane_rect.topleft = (plane_x, plane_y)
-
             graphics.draw_game_screen(screen, background_x, runway_x, runway_y, runway_width, runway_height, obstacles, plane_rect, rotated_plane)
 
             # Inside the main game loop, after drawing the obstacles but before updating the display
